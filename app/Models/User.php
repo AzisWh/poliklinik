@@ -37,5 +37,8 @@ class User extends Authenticatable
         return $this->no_ktp;
     }
 
-
+    public function daftarPoli()
+    {
+        return $this->hasMany(DaftarPoli::class, 'id_pasien');
+    }
 }

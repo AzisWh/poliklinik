@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
+use App\Http\Controllers\Dokter\PeriksaController;
+use App\Http\Controllers\Pasien\DaftarPoliController;
 use App\Http\Controllers\Pasien\PasienRoleController;
 use App\Http\Controllers\Pasien\PendaftaranPoliController;
 use Illuminate\Support\Facades\Route;
@@ -58,7 +60,6 @@ Route::middleware(['check_user_login:admin'])->prefix('admin')->group(function (
     Route::post('/pasien', [PasienController::class, 'store'])->name('admin.pasien.store');
     Route::patch('/pasien/{pasien}', [PasienController::class, 'update'])->name('admin.pasien.update');
     Route::delete('/pasien/{pasien}', [PasienController::class, 'destroy'])->name('admin.pasien.destroy');
-
 });
 
 //dokter
@@ -72,12 +73,15 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
 
     //profile
     Route::patch('/profile/{profile}', [DokterRoleController::class, 'update'])->name('dokter.profile.update');
-    
+
     //jadwal
     Route::get('/jadwal', [JadwalPeriksa::class, 'index'])->name('dokter.jadwal');
     Route::post('/jadwal', [JadwalPeriksa::class, 'store'])->name('dokter.jadwal.store');
     Route::patch('/jadwal/{jadwal}', [JadwalPeriksa::class, 'update'])->name('dokter.jadwal.update');
     Route::delete('/jadwal/{jadwal}', [JadwalPeriksa::class, 'destroy'])->name('dokter.jadwal.destroy');
+
+    // periksa
+    Route::get('/periksa', [PeriksaController::class, 'index'])->name('dokter.periksa');
 });
 
 //pasien
@@ -93,8 +97,7 @@ Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function
     Route::patch('/profile/{profile}', [PasienRoleController::class, 'update'])->name('pasien.profile.update');
 
     // daftar poli
-    Route::get('/poli', [PendaftaranPoliController::class,'index'])->name('pasien.poli');
+    Route::get('/poli', [PendaftaranPoliController::class, 'index'])->name('pasien.poli');
     Route::get('/get-poli/{id}', [PendaftaranPoliController::class, 'getJadwal']);
+    Route::post('/poli/store', [PendaftaranPoliController::class, 'store'])->name('pasien.poli.store');
 });
-
-
