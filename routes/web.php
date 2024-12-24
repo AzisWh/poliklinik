@@ -82,6 +82,7 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
 
     // periksa
     Route::get('/periksa', [PeriksaController::class, 'index'])->name('dokter.periksa');
+    Route::post('/periksa', [PeriksaController::class, 'store'])->name('dokter.periksa.store');
 });
 
 //pasien

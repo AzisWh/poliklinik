@@ -66,6 +66,15 @@ class PendaftaranPoliController extends Controller
         ]);
 
         try {
+            $existingRegistration = DaftarPoli::where('id_pasien', $request->id_pasien)
+                ->whereNull('deleted_at')
+                ->exists();
+
+            if ($existingRegistration) {
+                Alert::error('Gagal!', 'Anda sudah mendaftar. Harap menunggu giliran diperiksa.');
+                return redirect()->route('pasien.poli');
+            }
+
             $no_antrian = DaftarPoli::where('id_jadwal', $request->id_jadwal)->max('no_antrian') + 1;
 
             DaftarPoli::create([

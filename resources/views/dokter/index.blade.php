@@ -1,9 +1,9 @@
 @extends('layouts.dokter')
 
-@section('title','Dokter Dashboard')
+@section('title', 'Dokter Dashboard')
 
 @section('content')
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -35,12 +35,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $dokter)
+                    @foreach ($data as $dokter)
                         <tr>
                             <td>{{ $dokter->name }}</td>
                             <td>{{ $dokter->alamat }}</td>
                             <td>{{ $dokter->no_hp }}</td>
-                            <td>{{ $dokter->poli->name }}</td> 
+                            <td>{{ $dokter->poli->name }}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" onclick="editDokter({{ $dokter }})">Edit</button>
                             </td>
@@ -93,10 +93,10 @@
     <script>
         function editDokter(dokter) {
             $('#editModalLabel').text('Edit Data Dokter');
-            
+
             // Set action URL
             $('#editForm').attr('action', '/dokter/profile/' + dokter.id);
-            
+
             // Set form values
             $('#edit_name').val(dokter.name);
             $('#edit_alamat').val(dokter.alamat);
