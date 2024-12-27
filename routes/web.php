@@ -8,9 +8,11 @@ use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
 use App\Http\Controllers\Dokter\PeriksaController;
+use App\Http\Controllers\Dokter\RiwayatPeriksaController;
 use App\Http\Controllers\Pasien\DaftarPoliController;
 use App\Http\Controllers\Pasien\PasienRoleController;
 use App\Http\Controllers\Pasien\PendaftaranPoliController;
+use App\Http\Controllers\Pasien\RiwayatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +25,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //admin
 Route::get('/admin-login', [AdminController::class, 'login'])->name('admin.login');
@@ -83,11 +81,14 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
     // periksa
     Route::get('/periksa', [PeriksaController::class, 'index'])->name('dokter.periksa');
     Route::post('/periksa', [PeriksaController::class, 'store'])->name('dokter.periksa.store');
+    
+    // riwayat
+    Route::get('/riwayat', [RiwayatPeriksaController::class, 'index'])->name('dokter.riwayat');
 });
 
 //pasien
-Route::get('/pasien-login', [PasienRoleController::class, 'authPage'])->name('pasien.login');
-Route::post('/pasien-login', [PasienRoleController::class, 'login'])->name('pasien.login');
+Route::get('/', [PasienRoleController::class, 'authPage'])->name('pasien.login');
+Route::post('/', [PasienRoleController::class, 'login'])->name('pasien.login');
 Route::post('/register', [PasienRoleController::class, 'register'])->name('pasien.register');
 
 Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function () {
@@ -101,4 +102,8 @@ Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function
     Route::get('/poli', [PendaftaranPoliController::class, 'index'])->name('pasien.poli');
     Route::get('/get-poli/{id}', [PendaftaranPoliController::class, 'getJadwal']);
     Route::post('/poli/store', [PendaftaranPoliController::class, 'store'])->name('pasien.poli.store');
+    
+    // riwayat
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('pasien.riwayat');
+    // Route::get('/riwayat/detail-periksa/{id}', [RiwayatController::class, 'detailPeriksa'])->name('pasien.detail-periksa');
 });

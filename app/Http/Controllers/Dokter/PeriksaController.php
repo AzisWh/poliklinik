@@ -62,6 +62,6 @@ class PeriksaController extends Controller
             Alert::error('Gagal!', 'Terjadi kesalahan. ' . $e->getMessage());
         }
 
-        return redirect()->route('dokter.periksa');
+        return redirect()->route('dokter.riwayat');
     }
 }

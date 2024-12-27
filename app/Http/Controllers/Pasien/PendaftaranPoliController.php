@@ -72,7 +72,7 @@ class PendaftaranPoliController extends Controller
 
             if ($existingRegistration) {
                 Alert::error('Gagal!', 'Anda sudah mendaftar. Harap menunggu giliran diperiksa.');
-                return redirect()->route('pasien.poli');
+                return redirect()->route('pasien.riwayat');
             }
 
             $no_antrian = DaftarPoli::where('id_jadwal', $request->id_jadwal)->max('no_antrian') + 1;
@@ -89,6 +89,6 @@ class PendaftaranPoliController extends Controller
             Alert::error('Gagal!', 'Terjadi kesalahan saat menyimpan data. ' . $e->getMessage());
         }
 
-        return redirect()->route('pasien.poli');
+        return redirect()->route('pasien.riwayat');
     }
 }

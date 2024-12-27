@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" style="color: #ffffff;">
+                    <a href="{{ route('dokter.riwayat') }}" class="nav-link" style="color: #ffffff;">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Riwayat Pasien</p>
                     </a>

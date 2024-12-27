@@ -23,6 +23,7 @@ class PendaftaranPoli extends Model
         return $this->belongsTo(User::class, 'id_pasien');
     }
 
+
     public function jadwalPeriksa()
     {
         return $this->belongsTo(ModelJadwalPeriksa::class, 'id_jadwal');

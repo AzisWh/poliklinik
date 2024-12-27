@@ -24,6 +24,9 @@
                                 <a href="{{ route('pasien.profile') }}">Profile</a>
                             </li>
                             <li>
+                                <a href="{{ route('pasien.riwayat') }}">Riwayat</a>
+                            </li>
+                            <li>
                                 <form action="{{ route('pasien.logout') }}" method="POST" class="px-3">
                                     @csrf
                                     <button class="btn btn-danger btn-block  w-100 text-start"
