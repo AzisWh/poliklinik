@@ -88,7 +88,8 @@ class PasienRoleController extends Controller
             Alert::success('Berhasil', 'Login berhasil!');
             return redirect()->route('pasien.dashboard');
         }
-        return back()->withErrors(['message' => 'name atau no_hp salah.']);
+        Alert::error('Gagal', 'Nama atau No KTP salah.');
+        return back();
     }
 
     public function logout(Request $request)

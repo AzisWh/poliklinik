@@ -19,7 +19,7 @@ class RiwayatPeriksaController extends Controller
         ->whereHas('daftarPoli.jadwalPeriksa', function ($query) use ($dokterId) {
             $query->where('id_dokter', $dokterId);
         })
-        ->orderBy('tgl_periksa', 'desc')
+        ->orderBy('tgl_periksa', 'asc')
         ->get();
 
         // $listPasien = DB::table('users')
