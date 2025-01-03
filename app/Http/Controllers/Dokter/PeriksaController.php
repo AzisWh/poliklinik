@@ -40,6 +40,14 @@ class PeriksaController extends Controller
         try {
             $totalBiayaObat = ObatModel::whereIn('id', $request->obat)->sum('harga');
 
+            // dd([
+            //     'id_daftar_poli' => $request->id_daftar_poli,
+            //     'catatan' => $request->catatan,
+            //     'obat' => $request->obat,
+            //     'totalBiayaObat' => $totalBiayaObat,
+            //     'biaya_periksa' => 150000 + $totalBiayaObat
+            // ]);
+
             $periksa = TablePeriksa::create([
                 'id_daftar_poli' => $request->id_daftar_poli,
                 'tgl_periksa' => Carbon::now(),
@@ -50,7 +58,7 @@ class PeriksaController extends Controller
             foreach ($request->obat as $obatId) {
                 TableDetailPeriksa::create([
                     'id_periksa' => $periksa->id,
-                    'id_obat' => $obatId,
+                    'id_obat' => (int) $obatId,
                 ]);
             }
 
@@ -59,6 +67,7 @@ class PeriksaController extends Controller
 
             Alert::success('Berhasil!', 'Pasien sudah diperiksa.');
         } catch (\Exception $e) {
+            dd($e);
             Alert::error('Gagal!', 'Terjadi kesalahan. ' . $e->getMessage());
         }
 

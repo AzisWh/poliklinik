@@ -73,10 +73,13 @@
                                             <div class="d-flex justify-content-between">
                                                 <small>Obat</small>
                                                 <small>
-                                                    @foreach ($periksa->detailPeriksa as $detail)
-                                                        <p>{{ $detail->obat->nama_obat }} -
-                                                            Rp{{ number_format($detail->obat->harga, 0, ',', '.') }}</p>
-                                                    @endforeach
+                                                    <ul>
+                                                        @foreach ($periksa->detailPeriksa as $detail)
+                                                            <li>{{ $detail->obat->nama_obat }} -
+                                                                Rp{{ number_format($detail->obat->harga, 0, ',', '.') }}
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </small>
                                             </div>
 

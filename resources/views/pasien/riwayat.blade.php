@@ -83,6 +83,8 @@
                                                         </ul>
                                                     </small>
                                                 </div>
+                                            @else
+                                                <p>obat hilang</p>
                                             @endif
                                         @else
                                             <p>Data pemeriksaan belum tersedia.</p>

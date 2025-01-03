@@ -16,6 +16,10 @@ class TableDetailPeriksa extends Model
         'id_obat',
     ];
 
+    protected $casts = [
+        'id_obat' => 'array',
+    ];
+
     public function periksa()
     {
         return $this->belongsTo(TablePeriksa::class, 'id_periksa');

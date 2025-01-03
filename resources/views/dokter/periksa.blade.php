@@ -74,15 +74,20 @@
                         </div>
                         <div class="mb-3">
                             <label for="obat" class="form-label">Pilih Obat:</label>
-                            <select name="obat[]" id="obat" class="form-control" multiple required
-                                onchange="calculateTotal()">
+                            <div id="obat">
                                 @foreach ($obats as $obat)
-                                    <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">
-                                        {{ $obat->nama_obat }} - Rp{{ $obat->harga }}
-                                    </option>
+                                    <div class="form-check">
+                                        <input class="form-check-input obat-checkbox" type="checkbox"
+                                            id="obat-{{ $obat->id }}" name="obat[]" value="{{ $obat->id }}"
+                                            data-harga="{{ $obat->harga }}" onchange="calculateTotal()">
+                                        <label class="form-check-label" for="obat-{{ $obat->id }}">
+                                            {{ $obat->nama_obat }} - Rp{{ $obat->harga }}
+                                        </label>
+                                    </div>
                                 @endforeach
-                            </select>
+                            </div>
                         </div>
+
                         <div class="mb-3">
                             <label for="biaya_periksa" class="form-label">Biaya Periksa:</label>
                             <input type="text" id="biaya_periksa" class="form-control" value="150000" readonly>
@@ -106,8 +111,12 @@
 
             document.getElementById('biaya_periksa').value = 150000;
 
-            const select = document.getElementById('obat');
-            select.selectedIndex = -1;
+            // const select = document.getElementById('obat');
+            // select.selectedIndex = -1;
+
+            const checkboxes = document.querySelectorAll('.obat-checkbox');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+
 
             $('#periksaModal').modal('show');
         }
@@ -116,11 +125,15 @@
             const baseBiaya = 150000;
             let total = baseBiaya;
 
-            const selectedOptions = document.getElementById('obat').selectedOptions;
-            for (let option of selectedOptions) {
-                const hargaObat = parseInt(option.getAttribute('data-harga'));
-                total += hargaObat;
-            }
+            const checkboxes = document.querySelectorAll('.obat-checkbox');
+            checkboxes.forEach((checkbox) => {
+                const obatId = checkbox.value;
+
+                if (checkbox.checked) {
+                    const hargaObat = parseInt(checkbox.getAttribute('data-harga'));
+                    total += hargaObat;
+                }
+            });
 
             document.getElementById('biaya_periksa').value = total;
         }

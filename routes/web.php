@@ -26,6 +26,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::fallback(function () {
+    return view('error.404'); 
+});
+
+
 //admin
 Route::get('/admin-login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin-login', [AdminController::class, 'authenticate'])->name('admin.login');

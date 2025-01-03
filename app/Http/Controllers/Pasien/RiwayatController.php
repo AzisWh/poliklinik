@@ -24,7 +24,8 @@ class RiwayatController extends Controller
 
         $periksa = DB::table('table_periksa')
         ->leftJoin('table_detail_periksa', 'table_periksa.id', '=', 'table_detail_periksa.id_periksa')
-        ->select('table_periksa.*', 'table_detail_periksa.id as detail_id', 'table_detail_periksa.id_periksa', 'table_detail_periksa.id_obat')
+        ->leftJoin('table_obat', 'table_detail_periksa.id_obat', '=', 'table_obat.id') 
+        ->select('table_periksa.*', 'table_detail_periksa.id as detail_id', 'table_detail_periksa.id_periksa', 'table_detail_periksa.id_obat', 'table_obat.nama_obat', 'table_obat.harga')
         ->get();
 
         $status = [];
@@ -46,6 +47,7 @@ class RiwayatController extends Controller
             }
         }
 
+        // dd($detailPeriksa);
         return view('pasien.riwayat', compact('daftarPoli', 'status', 'nomor_antrian', 'detailPeriksa'));
     }
 

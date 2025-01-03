@@ -35,7 +35,9 @@ class DokterRoleController extends Controller
             Alert::success('Berhasil', 'Login berhasil!');
             return redirect()->route('dokter.dashboard');
         }
-        return back()->withErrors(['message' => 'name atau no_hp salah.']);
+        Alert::error('Gagal', 'Nama atau No Hp salah.');
+        return back();
+        
     }
 
     public function logout(Request $request)
