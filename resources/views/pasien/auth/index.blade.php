@@ -65,15 +65,17 @@
                         <h4 class="text-center">Selamat datang, silahkan masukan akun anda</h4>
 
                         <!-- Name input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="loginName" class="form-control" name="name" required />
-                            <label class="form-label" for="loginName">Name</label>
+                        <div class="form-group mb-4">
+                            <label for="loginName">Name</label>
+                            <input type="text" class="form-control" id="loginName" name="name"
+                                placeholder="Input Nama">
                         </div>
 
                         <!-- Nomor KTP input -->
-                        <div class="form-outline mb-4">
-                            <input type="number" id="loginPassword" class="form-control" name="no_ktp" required />
+                        <div class="form-group mb-4">
                             <label class="form-label" for="loginPassword">Nomor Ktp</label>
+                            <input type="number" id="loginPassword" class="form-control" name="no_ktp"
+                                placeholder="Input No Ktp" required />
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
@@ -87,35 +89,27 @@
                         <h4 class="text-center">Masukan data diri anda sesuai pada form inputan</h4>
 
                         <!-- Name input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="registerName" class="form-control" name="name" required />
+                        <div class="form-group mb-4">
                             <label class="form-label" for="registerName">Name</label>
+                            <input type="text" id="registerName" class="form-control" name="name" required />
                         </div>
 
                         <!-- Alamat input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="registerUsername" class="form-control" name="alamat" required />
+                        <div class="form-group mb-4">
                             <label class="form-label" for="registerUsername">Alamat</label>
+                            <input type="text" id="registerUsername" class="form-control" name="alamat" required />
                         </div>
 
                         <!-- No KTP input -->
-                        <div class="form-outline mb-4">
-                            <input type="number" id="registerEmail" class="form-control" name="no_ktp" required />
+                        <div class="form-group mb-4">
                             <label class="form-label" for="registerEmail">No Ktp</label>
+                            <input type="number" id="registerEmail" class="form-control" name="no_ktp" required />
                         </div>
 
                         <!-- No HP input -->
-                        <div class="form-outline mb-4">
-                            <input type="number" id="registerPassword" class="form-control" name="no_hp" required />
+                        <div class="form-group mb-4">
                             <label class="form-label" for="registerPassword">No Hp</label>
-                        </div>
-
-                        <!-- Checkbox -->
-                        <div class="form-check d-flex justify-content-center mb-4">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck"
-                                checked />
-                            <label class="form-check-label" for="registerCheck">I have read and agree to the
-                                terms</label>
+                            <input type="number" id="registerPassword" class="form-control" name="no_hp" required />
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>

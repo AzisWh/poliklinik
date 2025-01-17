@@ -60,32 +60,40 @@
                                         @if ($detailPeriksa[$item->id])
                                             <div class="d-flex justify-content-between">
                                                 <small>Tanggal Periksa</small>
-                                                <small>{{ Carbon\Carbon::parse($detailPeriksa[$item->id]->tgl_periksa)->format('Y-m-d') }}</small>
+                                                <small>{{ $detailPeriksa[$item->id]['tgl_periksa'] }}</small>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <small>Catatan Dokter</small>
-                                                <small>{{ $detailPeriksa[$item->id]->catatatn }}</small>
+                                                <small>{{ $detailPeriksa[$item->id]['catatan'] }}</small>
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <small>Biaya Pemeriksaan</small>
+                                                <small>Obat</small>
                                                 <small>
-                                                    <strong>Rp{{ number_format($detailPeriksa[$item->id]->biaya_periksa, 0, ',', '.') }}</strong>
+                                                    <ul>
+                                                        @if ($detailPeriksa[$item->id] && count($detailPeriksa[$item->id]['obat']) > 0)
+                                                            <div class="d-flex justify-content-between">
+                                                                <small>
+                                                                    <ul>
+                                                                        @foreach ($detailPeriksa[$item->id]['obat'] as $obat)
+                                                                            <li>{{ $obat['nama_obat'] }}
+                                                                                (Rp{{ number_format($obat['harga'], 0, ',', '.') }})
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </small>
+                                                            </div>
+                                                        @else
+                                                            <p>Obat tidak tersedia.</p>
+                                                        @endif
+                                                    </ul>
                                                 </small>
                                             </div>
-                                            @if ($detailPeriksa[$item->id] && !empty($detailPeriksa[$item->id]->obat_ids))
-                                                <div class="d-flex justify-content-between">
-                                                    <small>Obat</small>
-                                                    <small>
-                                                        <ul>
-                                                            @foreach ($detailPeriksa[$item->id]->detailPeriksa as $obat)
-                                                                <li>{{ $obat->obat->nama_obat }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </small>
-                                                </div>
-                                            @else
-                                                <p>obat hilang</p>
-                                            @endif
+                                            <div class="d-flex justify-content-between">
+                                                <small>Total Biaya</small>
+                                                <small>
+                                                    <strong>Rp{{ number_format($detailPeriksa[$item->id]['biaya_periksa'], 0, ',', '.') }}</strong>
+                                                </small>
+                                            </div>
                                         @else
                                             <p>Data pemeriksaan belum tersedia.</p>
                                         @endif

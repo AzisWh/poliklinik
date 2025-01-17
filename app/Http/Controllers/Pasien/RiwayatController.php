@@ -26,7 +26,8 @@ class RiwayatController extends Controller
         ->leftJoin('table_detail_periksa', 'table_periksa.id', '=', 'table_detail_periksa.id_periksa')
         ->leftJoin('table_obat', 'table_detail_periksa.id_obat', '=', 'table_obat.id') 
         ->select('table_periksa.*', 'table_detail_periksa.id as detail_id', 'table_detail_periksa.id_periksa', 'table_detail_periksa.id_obat', 'table_obat.nama_obat', 'table_obat.harga')
-        ->get();
+        ->get()
+        ->groupBy('id_daftar_poli');
 
         $status = [];
         $detailPeriksa = [];
@@ -35,12 +36,22 @@ class RiwayatController extends Controller
         foreach ($daftarPoli as $item) {
             $id = $item->id;
             $nomor_antrian[$id] = $item->no_antrian;
-    
-            $periksaData = $periksa->firstWhere('id_daftar_poli', $id);
-    
+        
+            $periksaData = $periksa->get($id);
+        
             if ($periksaData) {
                 $status[$id] = 'Sudah diperiksa';
-                $detailPeriksa[$id] = $periksaData;
+                $detailPeriksa[$id] = [
+                    'tgl_periksa' => $periksaData->first()->tgl_periksa,
+                    'catatan' => $periksaData->first()->catatatn,
+                    'biaya_periksa' => $periksaData->first()->biaya_periksa,
+                    'obat' => $periksaData->map(function ($data) {
+                        return [
+                            'nama_obat' => $data->nama_obat,
+                            'harga' => $data->harga,
+                        ];
+                    }),
+                ];
             } else {
                 $status[$id] = 'Menunggu diperiksa';
                 $detailPeriksa[$id] = null;

@@ -42,6 +42,16 @@ class JadwalPeriksa extends Controller
         ]);
 
         try {
+
+            $cekhari = ModelJadwalPeriksa::where('id_dokter', $dokter->id)
+            ->where('hari', $request->hari)
+            ->first();
+
+            if ($cekhari) {
+                Alert::error('Gagal!', 'Jadwal pada hari ' . $request->hari . ' sudah ada.');
+                return redirect()->back();
+            }
+
             if ($request->status == 'aktif') {
                 ModelJadwalPeriksa::where('id_dokter', $dokter->id)
                     ->where('status', 'aktif')
@@ -101,6 +111,7 @@ class JadwalPeriksa extends Controller
     {
         try {
             $jadwal = ModelJadwalPeriksa::findOrFail($id);
+
 
             if ($jadwal->status == 'aktif') {
                 $jadwal->delete();

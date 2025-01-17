@@ -22,16 +22,8 @@ class RiwayatPeriksaController extends Controller
         ->orderBy('tgl_periksa', 'asc')
         ->get();
 
-        // $listPasien = DB::table('users')
-        // ->join('daftar_poli', 'users.id', '=', 'daftar_poli.id_pasien')
-        // ->join('table_jadwal_periksa', 'daftar_poli.id_jadwal', '=', 'table_jadwal_periksa.id')
-        // ->where('table_jadwal_periksa.id_dokter', $dokterId)
-        // ->select('users.*')
-        // ->get();
 
-        // $sumPasien = $listPasien->count();
-
-
+        // dd($riwayatPeriksa);
         return view('dokter.riwayat', compact('riwayatPeriksa'));
     }
 }
